@@ -3,13 +3,6 @@
 // מערך המכיל את כל אנשי הקשר
 let contacts = [
   {
-    name: "Alice",
-    image: "images/woman1.jpg",
-    age: '23',
-    telephone: '050-5555555',
-    address: 'Tel Aviv'
-  },
-  {
     name: "Ben",
     image: "images/men.jpg",
     age: '25',
@@ -17,7 +10,15 @@ let contacts = [
     address: 'Tel Aviv'
   },
   {
-    name: "melisa",
+    name: "Alice",
+    image: "images/woman1.jpg",
+    age: '23',
+    telephone: '050-5555555',
+    address: 'Tel Aviv'
+  },
+
+  {
+    name: "Melisa",
     image: "images/woman2.jpg",
     age: '28',
     telephone: '050-5559555',
@@ -28,7 +29,6 @@ let contacts = [
 // יצירת שמות משתנים
 const contacts_list = document.getElementById("Contacts_list");
 const add_new_contact_popup = document.getElementById("add-new-contact");
-const add_btn = document.getElementById("add");
 const save_btn = document.getElementById("save_btn");
 const contact_popup = document.getElementById('contact-popup');
 const contact_popup_close_btn = document.getElementById('contact-popup-close');
@@ -38,16 +38,19 @@ const delete_all_btn = document.getElementById('delete-all');
 let editIndex = null;
 
 // פונקציה שמציגה את רשימת אנשי הקשר בדף
-function displayContacts() {
+function displayContacts(contactsArray) {
   contacts_list.innerHTML = '';
-  contacts.forEach((element, index) => {
+  contactsArray.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  contactsArray.forEach((element, index) => {
     const li = document.createElement('li');
 
     const image = document.createElement('img');
     image.setAttribute('src', element.image);
     image.alt = element.name + " photo ";
 
-    li.textContent = `${element.name}`;
+    li.textContent = `${element.name} ${element.telephone}`;
     li.prepend(image);
 
     const delete_btn = document.createElement('button');
@@ -71,30 +74,13 @@ function displayContacts() {
       const details = modal_content.querySelectorAll('p');
 
       details[0].textContent = `Name: ${element.name}`;
-      details[1].textContent = `Age: ${element.age}`;
-      details[2].textContent = `Telephone: ${element.telephone}`;
-      details[3].textContent = `Address: ${element.address}`;
+      details[2].textContent = ((element.age != '') ? `Age: ${element.age}` : '');
+      details[1].textContent = `Telephone: ${element.telephone}`;
+      details[3].textContent = (element.address != '') ? `Address: ${element.address}` : '';
 
       contact_popup.style.display = 'flex';
     });
 
-    //עריכת איש קשר קיים
-    edit_btn.addEventListener('click', () => {
-      editIndex = index;
-      document.getElementById('name-field').value = element.name;
-      document.getElementById('phone-field').value = element.telephone;
-      document.getElementById('address-field').value = element.address;
-      document.getElementById('age-field').value = element.age;
-      document.getElementById('img-field').value = element.image;
-
-      add_new_contact_popup.style.display = 'flex';
-    });
-
-    // לחצן למחיקת איש קשר
-    delete_btn.addEventListener('click', () => {
-      contacts.splice(index, 1);
-      displayContacts();
-    });
     //הוספת hover לשורה של איש הקשר
     li.addEventListener('mouseover', () => {
       li.style.backgroundColor = '#d6cfc5';
@@ -108,52 +94,11 @@ function displayContacts() {
   });
 }
 
-displayContacts();
+displayContacts(contacts);
 
 // סגירת חלון הצגת פרטי איש קשר
 contact_popup_close_btn.addEventListener('click', () => {
   contact_popup.style.display = 'none';
-});
-
-//הוספת איש קשר חדש
-add_btn.addEventListener('click', () => {
-  editIndex = null;
-  document.getElementById('name-field').value = '';
-  document.getElementById('phone-field').value = '';
-  document.getElementById('address-field').value = '';
-  document.getElementById('age-field').value = '';
-  document.getElementById('img-field').value = '';
-  add_new_contact_popup.style.display = 'flex';
-});
-
-// סגירת חלון הוספת/עריכת איש קשר
-add_new_person_close_btn.addEventListener('click', () => {
-  add_new_contact_popup.style.display = 'none';
-});
-
-// לחצן "שמור" בטופס הוספה/עריכה של איש קשר
-save_btn.addEventListener('click', () => {
-  const name = document.getElementById('name-field').value.trim();
-  const phone = document.getElementById('phone-field').value.trim();
-  const address = document.getElementById('address-field').value.trim();
-  const age = document.getElementById('age-field').value.trim();
-  const image = document.getElementById('img-field').value.trim();
-
-  if (!name || !phone) {
-    alert('Please fill out at least name and phone.');
-    return;
-  }
-
-  const newContact = { name, telephone: phone, address, age, image };
-
-  if (editIndex !== null) {
-    contacts[editIndex] = newContact;
-  } else {
-    contacts.push(newContact);
-  }
-
-  add_new_contact_popup.style.display = 'none';
-  displayContacts();
 });
 
 //מחיקת כל רשומות אנשי הקשר
@@ -161,7 +106,7 @@ if (delete_all_btn) {
   delete_all_btn.addEventListener('click', () => {
     if (confirm("Are you sure you want to delete all contacts?")) {
       contacts = [];
-      displayContacts();
+      displayContacts(contacts);
     }
   });
 }

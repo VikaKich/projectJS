@@ -219,6 +219,7 @@ footer {
     color: #5a4e3c;
     font-weight: 600;
 }
+
 #Contacts_list li img {
     width: 40px;
     height: 40px;
@@ -227,13 +228,16 @@ footer {
     object-fit: cover;
     vertical-align: middle;
 }
+
 #Contacts_list li button {
     margin-left: 8px;
 }
+
 #Contacts_list li {
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
+
 /* responsive*/
 @media (max-width: 768px) {
     main {
