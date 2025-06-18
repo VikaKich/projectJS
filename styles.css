@@ -64,8 +64,12 @@ main {
     transition: background-color 0.3s ease;
 }
 
-#Contacts_list li:hover {
-    background-color: #d4c8ae;
+
+.hovered {
+    background-color: bisque;
+    color: #362f21;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
 }
 
 .button {
@@ -104,7 +108,7 @@ footer {
 
 /* פופאפ (modal) */
 .modal {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.4);
@@ -215,7 +219,21 @@ footer {
     color: #5a4e3c;
     font-weight: 600;
 }
-
+#Contacts_list li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    vertical-align: middle;
+}
+#Contacts_list li button {
+    margin-left: 8px;
+}
+#Contacts_list li {
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
 /* responsive*/
 @media (max-width: 768px) {
     main {
