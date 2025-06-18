@@ -16,21 +16,13 @@
     <main>
 
         <button class="button" id="add">Add new person</button>
+        <button class="button" id="delete-all">Delete All Contacts</button>
 
         <ul id="Contacts_list">
-            <li>
-                person 1
-            </li>
-            <li>
-                person 2
-            </li>
-            <li>
-                person 3
-            </li>
+
         </ul>
 
         <button class="button" id="contact">Contact</button>
-        <button class="button" id="show_data">Show details</button>
 
     </main>
 
@@ -43,7 +35,7 @@
     <!-- Modal -->
     <div class="modal" id="add-new-contact" style="display: none;">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" id="add-person-close">&times;</span>
             <table>
                 <tbody>
                     <tr>
@@ -107,7 +99,7 @@
     <!--Contact Popup-->
     <div class="modal " id="contact-popup">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" id="contact-popup-close">&times;</span>
             <p>Name: </p>
             <p>Age: </p>
             <p>Telephone: </p>
