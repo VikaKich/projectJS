@@ -65,8 +65,8 @@ main {
 }
 
 
-.hovered {
-    background-color: bisque;
+#Contacts_list li.hovered {
+    background-color: #d6cfc5;
     color: #362f21;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
@@ -219,8 +219,7 @@ footer {
     color: #5a4e3c;
     font-weight: 600;
 }
-
-#Contacts_list li img {
+img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -228,14 +227,60 @@ footer {
     object-fit: cover;
     vertical-align: middle;
 }
-
 #Contacts_list li button {
     margin-left: 8px;
 }
-
 #Contacts_list li {
     transition: background-color 0.3s ease;
     cursor: pointer;
+}
+/* תיבת חיפוש */
+.search-container {
+    margin-bottom: 1em;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.8em 1.2em;
+    border: 1.5px solid #d4cbb7;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #5a4e3c;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+    background-color: #fbf8f2;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #a59570;
+    background-color: #fffef8;
+}
+/* אנימציות לאפקט מיוחד */
+@keyframes rainbow {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.rainbow-effect {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+    animation: rainbow 3s ease-in-out infinite;
+}
+/* הודעה כשהספר ריק */
+.empty-message {
+    text-align: center;
+    color: #7a6f56;
+    font-size: 1.2rem;
+    font-style: italic;
+    padding: 2em;
+    background-color: #f0ede7;
+    border-radius: 10px;
+    margin: 1em 0;
 }
 
 /* responsive*/
